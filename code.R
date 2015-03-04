@@ -2,13 +2,11 @@ setwd("~/ExData/ExData_Plotting1")
 
 # Preparing data
 data <- read.csv2("./data/household_power_consumption.txt", na.strings = "?")
-dates <- data$Date
 
-dates2 <- strptime(dates, "%d/%m/%Y")
-data$Date <- as.Date(dates2)
+x <- paste(data$Date, data$Time)
+data$Date <- strptime(x, "%d/%m/%Y %H:%M:%S")
 
-
-sample <- subset(data, Date >= as.Date("2007-02-01") & Date <= as.Date("2007-02-02"))
+sample <- subset(data, as.Date(Date) >= as.Date("2007-02-01") & as.Date(Date) <= as.Date("2007-02-02"))
 write.csv(sample, "./data/sample.csv")
 
 # Tidying up the sample
